@@ -1,0 +1,108 @@
+openapi: 3.0.0
+info:
+  title: Documentação da PokeAPI (Endpoints Utilizados na Aplicação)
+  description: Esta documentação descreve os endpoints da PokeAPI que são consumidos pela aplicação fornecida.
+  version: 1.0.0
+servers:
+  - url: https://pokeapi.co/api/v2
+    description: Servidor principal da PokeAPI
+paths:
+  /pokemon:
+    get:
+      summary: Obtém uma lista paginada de Pokémon.
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: O número de recursos a pular.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 20
+          description: O número de recursos a retornar.
+      responses:
+        "200":
+          description: Uma lista de Pokémon.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: O número total de recursos disponíveis.
+                  next:
+                    type: string
+                    nullable: true
+                    description: URL para a próxima página de resultados.
+                  previous:
+                    type: string
+                    nullable: true
+                    description: URL para a página anterior de resultados.
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: O nome do Pokémon.
+                        url:
+                          type: string
+                          description: A URL para os detalhes do Pokémon.
+  /pokemon/{id}:
+    get:
+      summary: Obtém detalhes de um Pokémon específico por ID ou nome.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: O ID ou nome do Pokémon.
+      responses:
+        "200":
+          description: Detalhes de um Pokémon.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: O ID do Pokémon.
+                  name:
+                    type: string
+                    description: O nome do Pokémon.
+                  order:
+                    type: integer
+                    description: A ordem do Pokémon.
+                  types:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        slot:
+                          type: integer
+                        type:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            url:
+                              type: string
+                  sprites:
+                    type: object
+                    properties:
+                      other:
+                        type: object
+                        properties:
+                          dream_world:
+                            type: object
+                            properties:
+                              front_default:
+                                type: string
+                                description: URL da imagem do Pokémon.
