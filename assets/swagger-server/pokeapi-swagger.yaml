@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Documentação da PokeAPI (Endpoints Utilizados na Aplicação)
-  description: Esta documentação descreve os endpoints da PokeAPI que são consumidos pela aplicação fornecida.
+  title: Documentação da PokeAPI com Swagger (Endpoints que eu utilizei)
+  description: Esta documentação descreve os endpoints da PokeAPI que eu utilizei.
   version: 1.0.0
 servers:
   - url: https://pokeapi.co/api/v2
