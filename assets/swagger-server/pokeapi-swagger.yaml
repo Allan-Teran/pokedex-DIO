@@ -6,10 +6,19 @@ info:
 servers:
   - url: https://pokeapi.co/api/v2
     description: Servidor principal da PokeAPI
+tags:
+  - name: Pokemon Info
+    description: Informações sobre Pokémons.
+  - name: Pokemon Moves
+    description: Infomações sobres os movimentos dos Pokemons.
+  - name: Pokemon Berris
+    description: Informações sobre as Berris.
 paths:
   /pokemon:
     get:
       summary: Obtém uma lista paginada de Pokémon.
+      tags:
+        - Pokemon Info
       parameters:
         - in: query
           name: offset
@@ -56,6 +65,8 @@ paths:
   /pokemon/{id}:
     get:
       summary: Obtém detalhes de um Pokémon específico por ID ou nome.
+      tags:
+        - Pokemon Info
       parameters:
         - in: path
           name: id
@@ -106,3 +117,320 @@ paths:
                               front_default:
                                 type: string
                                 description: URL da imagem do Pokémon.
+  /move/{id or name}:
+    get:
+      summary: Obtem detalhes de um movimento especifico por ID ou NOME.
+      tags:
+        - Pokemon Moves
+      parameters:
+        - in: path
+          name: id or name
+          schema:
+            type: string
+          required: true
+          description: O id ou nome do movimento do pokemon.
+      responses:
+        "200":
+          description: Detalhes de um movimento.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: O id do movimento do pokemon.
+                  name:
+                    type: string
+                    description: O nome do movimento do pokemon.
+                  accuracy:
+                    type: integer
+                    description: A precisão do movimento.
+                  effect chance:
+                    type: integer
+                    description: A chance de efeito do movimento.
+                  pp:
+                    type: integer
+                    description: O numero de vezes que o movimento pode ser usado.
+                  power:
+                    type: integer
+                    description: O poder do movimento.
+                  contest_effects:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        description: A URL para os detalhes do efeito do concurso.
+                  damage_class:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: O nome da classe de dano do movimento.
+                      url:
+                        type: string
+                        description: A URL para os detalhes da classe de dano.
+                  effect_entries:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        effect:
+                          type: string
+                          description: O efeito do movimento.
+                  effect_changes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                  learned_by_pokemon:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: O nome do Pokemon que aprende o movimento.
+                        url:
+                          type: string
+                          description: A URL para os detalhes do Pokemon.
+                  flavours_text_entries:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        flavours:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: O nome do sabor do movimento.
+                            url:
+                              type: string
+                              description: A URL para od detalhes do sabor do movimento.
+                  generation:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: O nome da geração do movimento.
+                      url:
+                        type: string
+                        description: A URL para os detalhes da geração do movimento.
+                  meta:
+                    type: object
+                    properties:
+                      ailment:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: nome do status negativo do movimento.
+                          url:
+                            type: string
+                            description: A URL para os detalhes do status negativo do movimento.
+                      category:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: O nome da categoria do movimento.
+                          url:
+                            type: string
+                            description: A URL para os detalhes da categoria do movimento.
+                        min_hits:
+                          type: integer
+                          description: O numero minimo de acertos do movimento.
+                        max_hits:
+                          type: integer
+                          description: O numero maximo de acertos do movimento.
+                        min_turns:
+                          type: integer
+                          description: O numero minimo de turnos do movimento.
+                        max_turns:
+                          type: integer
+                          description: O numero maximo de turnos do movimento.
+                        drain:
+                          type: integer
+                          description: O valor de drenagem do movimento.
+                        healing:
+                          type: integer
+                          description: O valor de cura do movimento.
+                        crit_rate:
+                          type: integer
+                          description: A taxa de acerto critico do movimento.
+                        ailment_chance:
+                          type: integer
+                          description: A chance de causar o status negativo do movimento.
+                        flinch_chance:
+                          type: integer
+                          description: A chance de causar "flinch" com o movimento.
+                        stat_chance:
+                          type: integer
+                          description: A chance de causar alteração de status com o movimento.
+                        target:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: O nome do alvo do movimento.
+                            url:
+                              type: string
+                              description: A URL para os detalhes do alvo do movimento.
+                  names:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: O nome do movimento.
+                        url:
+                          type: string
+                          description: A URL para os detalhes do movimento.
+                  past_values:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        accuracy:
+                          type: integer
+                          description: A precisão do movimento em versões passadas.
+                        effect_chance:
+                          type: integer
+                          description: A chance de efeito do movimento em versões passadas.
+                        power:
+                          type: integer
+                          description: O poder do movimento em versões passadas.
+                        pp:
+                          type: integer
+                          description: O numero de vezes que o movimento pode ser usado um versões passadas.
+                  stats_changes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        change:
+                          type: integer
+                          description: A alteração de status do movimento.
+                        stat:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: O nome do status alterado pelo movimento.
+                            url:
+                              type: string
+                              description: A URL para os detalhes do status alterado pelo movimento.
+                  super_contest_effect:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        description: A URL para os detalhes do super efeito do movimento.
+                  target:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: O nome do alvo do movimento.
+                      url:
+                        type: string
+                        description: A URL para os detalhes do alvo do movimento.
+                  type:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: O tipo do movimento.
+                      url:
+                        type: string
+                        description: A URL para os detalhes do tipo.
+  /berry/{id or name}:
+    get:
+      summary: Obtem detalhes de uma Berry especifica por ID ou NOME.
+      tags:
+      - Pokemon Berris
+      parameters:
+        - in: path
+          name: id or name
+          schema:
+            type: string
+          required: true
+          description: O id ou nome da Berry.
+      responses:
+        "200":
+          description: Detalhes da Berry.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: O id da Berry.
+                  name:
+                    type: string
+                    description: O nome da berry.
+                  max_harvest:
+                    type: integer
+                    description: O numero maximo de colheitas da Berry.
+                  growth_time:
+                    type: integer
+                    description: O tempo de crescimento da Berry.
+                  natural_gift_power:
+                    type: integer
+                    description: O poder do presente natural da Berry. #NÃO SEI O QUE É O PRESENTE NATURAL DA BERRY
+                  size:
+                    type: integer
+                    description: O tamanho da Berry.
+                  smoothness:
+                    type: integer
+                    description: A suavidade da Berry. # Nem sabia que tinha esse status ai
+                  soil_dryness:
+                    type: integer
+                    description: A secura do solo da Berry.
+                  firmness:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: O nome da firmeza da Berry
+                      url:
+                        type: string
+                        description: A url para os detalhes da firmeza da Berry.
+                  flavours:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        potency:
+                          type: integer
+                          description: A potencia do sabor da Berry.
+                        flavors:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: O nome do sabor da Berry.
+                            url:
+                              type: string
+                              description: A URL para os detalhes do sabor da Berry.
+                  item:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: O nome do item da Berry.
+                      url:
+                        type: string
+                        description: A URL para os detalhes do item da Berry.
+                    natural_gift_type:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: O nome do tipo do presente natural da Berry.
+                        url:
+                          type: string
+                          description: A URL para os detalhes do tipo do presente natural da Berry.
