@@ -113,6 +113,7 @@
 
 .pagination {
     display: flex;
+    gap: .5rem;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -128,6 +129,30 @@
     background-color: #6c79db;
     border: none;
     border-radius: 1rem;
+    cursor: pointer;
+    transition:all ease-out .2s;
+    border:1px solid transparent;
+}
+
+.linkSwagger {
+    padding: 0.25rem 0.5rem;
+    margin: .25rem 0;
+    font-size: .625rem;
+    background-color: #6c79db;
+    border: none;
+    border-radius: 1rem;
+    color: #fff;
+    text-decoration: none;
+    transition:all ease-out .2s;
+    border:1px solid transparent;
+}
+
+.linkSwagger:hover, .pagination button:hover {
+    background-color: #fff;
+    color: #6c79db;
+    text-decoration: none;
+    border:1px solid #6c79db;
+    transform: scale(1.15);
 }
 
 /*----------------------------RESPONSIVIDADE-------------------------- */
